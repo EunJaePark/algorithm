@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm</title>
+</head>
+<body>
+
+    <h1>문제 설명</h1>
+    <p>
+        단어 s의 가운데 글자를 반환하는 함수, solution을 만들어 보세요. 
+        단어의 길이가 짝수라면 가운데 두글자를 반환하면 됩니다.
+    </p>
+
+    
+    <h2>제한 조건</h2>
+    <ul>
+        <li>s는 길이가 1 이상, 100이하인 스트링입니다.</li>
+    </ul>
+
+
+
+    <script>
+        // 풀이 1)
+        function solution(s) {
+            var answer = '';
+            
+            var leng = s.length           
+
+            if(leng % 2 == 0) {
+                answer = s.substring((leng/2) - 1, (leng/2) + 1);
+            } else {
+                answer = s.substring((leng/2) - .5, (leng/2) + .5);
+            }
+            
+            return answer;
+        }
+        // substring(a, b) : a번째 글자부터 b번째 글가까지 추출.
+
+        // '%'는 나머지를 구하고,   예) 5 / 2 = 2.5
+        // '/'는 기본적인 나누기로 만약 홀수일 경우소수점자리로 나눈 결과값이 나온다.  예) 5 % 2 = 1
+
+
+        // 풀이 2)
+        function solution(s) {
+            var answer = '';
+            
+            var leng = s.length
+            
+            if(leng % 2 == 0) {
+                answer = s.substr((leng/2) - 1, 2);
+            } else {
+                answer = s.substr((leng/2), 1);
+            }
+                       
+            return answer;
+        } 
+        // substr(a, b) : a번째 글자부터 b개의 글자를 추출.
+
+    </script>
+    
+</body>
+</html>
+
