@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm</title>
+</head>
+<body>
+
+    <h1>문제 설명</h1>
+    <p>
+        길이가 n이고, "수박수박수박수...."와 같은 패턴을 유지하는 문자열을 리턴하는 함수, solution을 완성하세요. 
+        예를들어 n이 4이면 수박수박을 리턴하고 3이라면 수박수를 리턴하면 됩니다.
+    </p>
+
+    
+    <h2>제한 조건</h2>
+    <ul>
+        <li>n은 길이 10,000이하인 자연수입니다.</li>
+    </ul>
+
+
+
+    <script>
+        // 풀이 1)
+        function solution(n) {
+            var answer = '';
+            
+            var txt = [];  // 수박수박...글씨를 넣을 배열을 만들어 줌.
+            for(let i = 1; i <= n; i++) {
+                if(i % 2 == 0) {  // 짝수이면
+                    txt[i] = '박'  // '박'
+                } else {
+                    txt[i] = '수' // 홀수이면 '수'
+                }
+            }
+    
+            answer = txt.join("");  // 배열로 되어있는 결과를 join()을 이용해서 하나의 문장으로 바꿔줌.
+            
+            return answer;
+        }
+
+        // 풀이 2)
+        // 풀이 1을 삼항연산자를 이용해 좀더 간단하게 적음.
+        function solution(n) {
+            var answer = '';
+            
+            var txt = [];
+            for(let i = 1; i <= n; i++) {
+                (i % 2 == 0) ? txt[i] = '박' : txt[i] = '수';
+            }
+    
+            answer = txt.join("");
+            
+            return answer;
+        }
+
+
+        // 다른사람 풀이 1)
+        function solution(n) {
+            var answer = '';
+            
+            answer = '수박'.repeat(n / 2) + (n % 2 !== 0 ? '수' : '');
+            
+            return answer;
+        }
+        // '수박' 글씨를 n을 2로 나눈만큼 반복해준 뒤, 그 뒤로 n을 2로 나눴을 때 나머지가 있으면 '수'를 붙여주고, 나머지가 없으면 아무것도 붙이지 않는다.
+
+        // 다른사람 풀이 2)
+        function solution(n) {
+            var answer = '';
+            
+            answer = '수박'.repeat(n).slice(0, n)
+            
+            return answer;
+        }
+        // '수박'글씨를 n번만큼 반복한 뒤에, 0번부터 n번까지만 추출해 낸다.
+        // '수박'은 두 글자니까 n번만큼 반복하면 정답의 2배가 되니까, 그 절반만큼만 앞에서부터 추출한 것. 
+
+    </script>
+    
+</body>
+</html>
