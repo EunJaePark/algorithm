@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm</title>
+</head>
+<body>
+
+    <h1>문제 설명</h1>
+    <p>
+        정수 n을 입력받아 n의 약수를 모두 더한 값을 리턴하는 함수, solution을 완성해주세요.
+    </p>
+
+    
+    <h2>제한 조건</h2>
+    <ul>
+        <li>n은 0 이상 3000이하인 정수입니다.</li>
+    </ul>
+
+
+
+    <script>
+        // 풀이 1)
+        function solution(n) {
+            var answer = 0;
+            
+            var findNum = []; // 약수를 넣을 배열을 생성.
+            for(let i = 0; i <= n; i++) {
+                if(n % i === 0) { // 약수일 경우에
+                findNum[i] = i;  // findNum의 객체로 넣어준다.
+                }
+            }
+            
+            answer = findNum.reduce((a, b) => a + b, 0) // 배열 속 객체들(약수)를 모두 더해준다.
+            
+            return answer;
+        }
+        // reduce(): 배열의 각 요소에 대해 주어진 리듀서(reducer) 함수를 실행하고, 하나의 결과값을 반환한다.
+        // reduce()는 빈 요소를 제외하고 배열 내에 존재하는 각 요소에 대해 callback 함수를 한 번씩 실행하는데, 콜백 함수는 다음의 네 인수를 받는다.   
+
+        // reduce라는 이름은 이 메서드가 배열들을 하나의 값으로 줄이기 때문에 생겼다.
+        // 배열에 들어있는 숫자를 더하거나 평균을 구하는 것은 배열을 값 하나로 줄이는 동작이라고 할 수 있다.
+
+        // 콜백함수는 (accumulator, currentValue, currentIndex, array) 이렇게 네 인수를 받는다.
+        // (누산기, 현재 값(처리할 현재 요소), 현재 인덱스(사용해도 되고 안해도 된다.), 원본 배열(사용해도 되고 안해도 된다.))
+
+        // 참고로, initialValue가 제공될 경우, accumulator는 initialValue와 같고, currentIndex는 배열의 첫 번째 값과 같다.
+        // 하지만, initialValue가 제공되지 않을 경우, accumulator는 배열의 첫 번째 값과 같고, currentIndex는 배열의 두 번째 값과 같다.
+        // reduce((initialValue, currentValue, currentIndex, array) => ())
+
+
+        // 다른사람 풀이 1)
+        function solution(n) {
+            let sum = 0;
+            for (let i = 1; i <= n; i++) {
+                if (n % i === 0) sum += i
+            }
+            return sum;
+        }
+        // if문으로 약수일 경우에 sum에 약수인 i를 계속해서 더해주는 방법으로 해결했다. 깔끔하다.
+
+    </script>
+    
+</body>
+</html>
