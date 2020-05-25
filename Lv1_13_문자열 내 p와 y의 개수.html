@@ -56,13 +56,29 @@
             answer = s.match(/p/gi).length === s.match(/y/gi).length ? true : false;
             // ===> 그래도 2,3번 틀림...
 
+            // 시도 5)
+            // match버리고 다시 toLoserCase()로 돌아가보자.
+            answer = s.toLowerCase().split('p').length === s.toLowerCase().split('y').length ? true : false;
+            // ===> 성공함.....>!!!!ㅠㅠㅠㅠㅠ
+
             return answer;
         }
         // 처음에는 toLowerCase(), toUpperCase()를 사용해서 소문자 또는 대문자로 바꿔줬었다.
+        // split()로 글자 분해해줬음.
         // 이를 더 간단하게 정규식으로 작성해봄.
 
+        // 테스트 성공 후 다른사람의 풀이를 보니 내가 푼 방식과 같은 match()와 정규식을 사용해서 푼 사람들이 있다. 왜 내가 했을 땐 안된걸까??? 다를게 없어보이는데...? 특히 시도 4번은 같은거 같은데...?
 
-        // 풀이 2)
+
+
+
+
+        // 다른사람 풀이 1)
+        function numPY(s) {
+            return s.match(/p/ig).length == s.match(/y/ig).length;
+        }
+        //  내 풀이 시도4와 같은 의미 아닌가??
+        // ==와 ===의 차이인건 아닐텐데...?
 
     </script>
     
