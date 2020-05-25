@@ -53,7 +53,7 @@
             // 둘다 0일경우는 따로 조건을 줄 필요가 없어졌으니, 하나의 조건만 있으면 되는 거 아닌가..?
             // 제일 기본적인 조건인 p의 갯수와 y의 갯수가 같으면 true, 다르면 false.
             // 그럼 return값인 answer에 이 조건을 줘서 맞으면 true, 틀리면 false를 반환할듯?
-            answer = s.match(/p/gi).length === s.match(/y/gi).length
+            answer = s.match(/p/gi).length === s.match(/y/gi).length ? true : false;
             // ===> 그래도 2,3번 틀림...
 
             return answer;
