@@ -61,6 +61,11 @@
             answer = s.toLowerCase().split('p').length === s.toLowerCase().split('y').length ? true : false;
             // ===> 성공함.....>!!!!ㅠㅠㅠㅠㅠ
 
+            // 시도 6)
+            // toLowerCase대신 정규식 사용해봄.
+            answer = s.split(/p/gi).length === s.split(/y/gi).length ? true : false;
+            // ===> 얘도 성공!!
+
             return answer;
         }
         // 처음에는 toLowerCase(), toUpperCase()를 사용해서 소문자 또는 대문자로 바꿔줬었다.
@@ -70,7 +75,7 @@
         // 테스트 성공 후 다른사람의 풀이를 보니 내가 푼 방식과 같은 match()와 정규식을 사용해서 푼 사람들이 있다. 왜 내가 했을 땐 안된걸까??? 다를게 없어보이는데...? 특히 시도 4번은 같은거 같은데...?
 
 
-
+        // 5.27 추가) match함수가 작동 안되는듯??? 아래에 적은 다른사람 풀이로 테스트해보니 실패하네????
 
 
         // 다른사람 풀이 1)
