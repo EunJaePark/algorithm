@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm</title>
+</head>
+<body>
+
+    <h1>문제 설명</h1>
+    <p>
+        점심시간에 도둑이 들어, 일부 학생이 체육복을 도난당했습니다. 
+        다행히 여벌 체육복이 있는 학생이 이들에게 체육복을 빌려주려 합니다. 
+        학생들의 번호는 체격 순으로 매겨져 있어, 바로 앞번호의 학생이나 바로 뒷번호의 학생에게만 체육복을 빌려줄 수 있습니다. 
+        예를 들어, 4번 학생은 3번 학생이나 5번 학생에게만 체육복을 빌려줄 수 있습니다. 체육복이 없으면 수업을 들을 수 없기 때문에 체육복을 적절히 빌려 최대한 많은 학생이 체육수업을 들어야 합니다.
+
+        전체 학생의 수 n, 체육복을 도난당한 학생들의 번호가 담긴 배열 lost, 여벌의 체육복을 가져온 학생들의 번호가 담긴 배열 reserve가 매개변수로 주어질 때, 체육수업을 들을 수 있는 학생의 최댓값을 return 하도록 solution 함수를 작성해주세요.
+    </p>
+
+    
+    <h2>제한 조건</h2>
+    <ul>
+        <li>전체 학생의 수는 2명 이상 30명 이하입니다.</li>
+        <li>체육복을 도난당한 학생의 수는 1명 이상 n명 이하이고 중복되는 번호는 없습니다.</li>
+        <li>여벌의 체육복을 가져온 학생의 수는 1명 이상 n명 이하이고 중복되는 번호는 없습니다.</li>
+        <li>여벌 체육복이 있는 학생만 다른 학생에게 체육복을 빌려줄 수 있습니다.</li>
+        <li>여벌 체육복을 가져온 학생이 체육복을 도난당했을 수 있습니다. 이때 이 학생은 체육복을 하나만 도난당했다고 가정하며, 남은 체육복이 하나이기에 다른 학생에게는 체육복을 빌려줄 수 없습니다.</li>
+    </ul>
+
+
+
+    <script>
+
+        // 시도 1) 실패..... 예시는 성공... 채점은 절반 넘게 실패...일단 기록해 놓는다...
+        function solution(n, lost, reserve) {
+            var answer = [];
+            
+            // // "전체 인원 - (도둑맞은 인원 - 도둑맞았으나 여분있는 인원)"을 구해보자!!
+            // // 도둑맞았지만 여분있는 학생.
+            // var lostButReserve = 0;
+            
+            var students = [];
+            for(let i = 0; i < n; i++) {
+                students.push(1)
+            }
+
+            reserve.forEach(function(stu) {
+                students[stu - 1]++;
+            })
+            
+            lost.forEach(function(stu) {
+                // 도둑맞은 학생 1뺴줌.(도둑맞은 본인이 여분있으면 0안되니까 따로 계산 필요 없음.)
+                students[stu - 1]--;
+                // 도둑맞은 학생 중 뒤의 학생이 여분있으면 +1해줌.(빌려준 학생은 -1)
+                if(students[stu] > 1) {
+                    students[stu - 1]++;
+                    students[stu]--;
+                }
+                // 도둑맞은 학생 중 앞의 학생이 여분있으면 +1해줌.
+                else if(students[stu - 2] > 1) {
+                    students[stu - 1]++;
+                }
+            })
+            
+            students.forEach(function(stu) {
+                if(stu !== 0) answer.push(stu);
+            })
+                     
+            return answer.length;
+        }
+
+
+        // 시도 2) 실패!!!! 역시나 예시 2개는 성공했지만 채점하니 절반이 틀림. 
+        function solution(n, lost, reserve) {
+            var answer = 0;
+            
+            // // 여분의 체육복을 가져온 학생이 도난을 당했는지 확인.
+            // // 도난당했으면 양수, 도난당하지 않았으면 -1.    
+            // for(let i = 0; i < lost.length; i++) {
+            //     answer = reserve.indexOf(lost[i]); 
+            // }
+            
+            
+            var students = [];
+            // 모든 학생에게 true 부여.(=체육복 있음)
+            for(let i = 0; i < n; i++) {
+                students.push(true);
+            }
+            // 도둑맞은 학생을 false로 체인지.
+            lost.forEach(function(lostStudent) {
+                students[lostStudent - 1] = false;
+                // students를 확인해보니 해당 학생이아닌 +1인 학생에게 적용된다. 따라서 -1해줌.
+            })
+            // 도둑맞았지만 여분있는 학생 true로 체인지.
+            reserve.forEach(function(reserveStudent) {
+                students[reserveStudent - 1] = true;
+            })
+            
+            // 여분가진 학생이 도난당한 학생에게 줄 수 있는 여러 경우.
+            reserve.forEach(function(stu) {
+                // 여분가진 학생이 첫번째 학생이 아니면서 앞의 학생이 도난당한 경우.
+                // 여분가진학생=그대로 true, 도난당한앞학생=true로 체인지.
+                if(stu !== 1 &&  students[stu - 1] === true && students[stu - 2] === false) {         
+                    students[stu - 1] = true;
+                    students[stu - 2] = true;
+                } 
+                // 여분가진학생이 첫번째 학생이 아니면서 도난당하지 않고 , 앞의 학생도 도난당하지 않고, 뒤의 학생만 도난당한 경우.
+                // 여분가진학생=그대로 true, 도난당한뒤의학생=true로 체인지.
+                else if(stu !== 1 && students[stu - 1] === true && students[stu] === false) {
+                    students[stu - 1] = true;
+                    students[stu] = true;
+                }
+                // 여분가진 학생이 첫번째이면서, 뒤의 학생이 도난당한 경우.
+                // 여분가진학생=그대로 true, 도난당한뒤학생=true로 체인지.
+                else if(stu === 1 && students[stu - 1] === true && students[stu] === false) {
+                    students[stu - 1] = true;
+                    students[stu] = true;
+                }
+                // 여분가진학생이 첫번째이면서, 앞의 학생이 도난당한 경우.
+                // 여분가진학생=그대로 true, 도난당한뒤의학생=true로 체인지.
+                else if(stu === 1 && students[stu - 1] === true && students[stu - 2] === false) {
+                    students[stu - 1] = true;
+                    students[sut - 2] = true;
+                }
+            })
+            
+            // students가 배열이니까 하나로 합쳐준 뒤에 match사용.(match는 배열에서 사용 안되는것 같으니까)
+            if(students.join().match(/true/g) != null) {
+                answer = students.join().match(/true/g).length;
+            }
+            
+            return answer;
+        }
+
+    </script>
+    
+</body>
+</html>
