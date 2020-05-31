@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm</title>
+</head>
+<body>
+
+    <h1>문제 설명</h1>
+    <p>
+        2016년 1월 1일은 금요일입니다. 2016년 a월 b일은 무슨 요일일까요? 
+        두 수 a ,b를 입력받아 2016년 a월 b일이 무슨 요일인지 리턴하는 함수, solution을 완성하세요. 
+        요일의 이름은 일요일부터 토요일까지 각각 SUN,MON,TUE,WED,THU,FRI,SAT 입니다. 
+        예를 들어 a=5, b=24라면 5월 24일은 화요일이므로 문자열 TUE를 반환하세요.
+    </p>
+
+    
+    <h2>제한 조건</h2>
+    <ul>
+        <li>2016년은 윤년입니다.</li>
+        <li>2016년 a월 b일은 실제로 있는 날입니다. (13월 26일이나 2월 45일같은 날짜는 주어지지 않습니다)</li>
+    </ul>
+
+
+
+    <script>
+        // 풀이 1)
+        function solution(a, b) {
+            var answer = '';
+            
+            // 요일과 달별 날짜수를 배열로 생성.(요일은 문제에 맞춰 금요일부터 시작)
+            var day = ['FRI', 'SAT', 'SUN', 'MON', 'TUE', 'WED', 'THU'];
+            var month = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            
+            // 날짜수 구하는 변수 선언. 
+            // date에 날짜를 먼저 입력해줌.(풀이 다 하고 테스트해보니 +1만큼 요일이 나와서 -1해줌!)
+            var date = b - 1;
+            
+            // a값으로 들어온 '달'의 전달만큼 날짜수 더해줌.
+            for(let i = 0; i < (a - 1); i++) { 
+                date += month[i]
+            }
+            
+            // a월 b일의 날짜수를 7로 나눈 나머지 순번쨰 요일을 구한다.
+            answer = day[(date % 7)] 
+            
+            return answer;
+        }
+
+
+
+
+
+        // 다른사람 풀이 1)
+        function solution(a,b){
+            var arr = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+            var date = new Date(`2016-${a}-${b}`);
+            var day = date.getDay()
+            return arr[day];
+        }
+        // 날짜를 힘들게 배열로 만들지 않고 new Date를 사용해줬다.
+        // new Date로 구한 날짜의 요일을 getDay()로 편하게 구해줬다.....
+
+    </script>
+    
+</body>
+</html>
