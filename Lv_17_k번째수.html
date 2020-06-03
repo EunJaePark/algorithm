@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm</title>
+</head>
+<body>
+
+    <h1>문제 설명</h1>
+    <p>
+        배열 array의 i번째 숫자부터 j번째 숫자까지 자르고 정렬했을 때, k번째에 있는 수를 구하려 합니다.
+
+        예를 들어 array가 [1, 5, 2, 6, 3, 7, 4], i = 2, j = 5, k = 3이라면
+
+        1. array의 2번째부터 5번째까지 자르면 [5, 2, 6, 3]입니다.
+        2. 1에서 나온 배열을 정렬하면 [2, 3, 5, 6]입니다.
+        3. 2에서 나온 배열의 3번째 숫자는 5입니다.
+
+        배열 array, [i, j, k]를 원소로 가진 2차원 배열 commands가 매개변수로 주어질 때, commands의 모든 원소에 대해 앞서 설명한 연산을 적용했을 때 나온 결과를 배열에 담아 return 하도록 solution 함수를 작성해주세요.
+    </p>
+
+    
+    <h2>제한 조건</h2>
+    <ul>
+        <li>array의 길이는 1 이상 100 이하입니다.</li>
+        <li>array의 각 원소는 1 이상 100 이하입니다.</li>
+        <li>commands의 길이는 1 이상 50 이하입니다.</li>
+        <li>commands의 각 원소는 길이가 3입니다.</li>
+    </ul>
+
+
+
+    <script>
+        // 시도 1) 문제 2번이 실패했다!!!!
+        // 질문 찾아보니 sort()함수를 사용할 때 예를 들면 35와 100을 비교하면 3이 1보다 크기때문에 35를 우위에 둔다. 따라서 비교함수를 넣어줘야 한다고 적혀있다. (지난번에 봐놓고도 또 안적음..ㅎㅎ)
+        function solution(array, commands) {
+            var answer = [];
+            
+            for(let i = 0; i < commands.length; i++) {
+                // commands[i][0]으로 설정하니까 1이 구해지지 않는다. 따라서 -1해줌.
+                // slice(a,b): a=시작점. b전까지만 추출.
+                var cutArray = array.slice(commands[i][0] - 1, commands[i][1]).sort();
+                answer.push(cutArray[commands[i][2]-1]);
+            }
+            
+            return answer;
+        }
+
+        // 시도 2) 성공!!
+        function solution(array, commands) {
+            var answer = [];
+            
+            for(let i = 0; i < commands.length; i++) {
+                // commands[i][0]으로 설정하니까 1이 구해지지 않는다. 따라서 -1해줌.
+                // slice(a,b): a=시작점. b전까지만 추출.
+                var cutArray = array.slice(commands[i][0] - 1, commands[i][1]).sort((a, b) => a-b);
+                answer.push(cutArray[commands[i][2]-1]);
+            }
+            
+            return answer;
+        }
+
+        // 이번 문제는 오히려 for문을 여러개 돌려서 풀으려니까 잘 안되서 메서드들을 이용했다.
+        // 구조를 완벽하게 이해하지 못한 듯 싶다.
+
+
+
+
+        // 다른사람 풀이 1)
+        function solution(array, commands) {
+            let answer = [];
+            let ans1= [];
+            let cnt=0;
+            for(var j=0;j<commands.length;j++){
+                ans1=[]; //정렬 전 담는 배열 초기화
+                cnt= 0; //인덱스 초기화
+                for(var i=commands[j][0]-1;i<commands[j][1];i++){
+                    ans1[cnt]= array[i];
+                    cnt++;
+                }
+                ans1.sort(function(a,b){return a-b}); //sort 함수가 아스키코드 기준이라  
+                answer[j]=ans1[commands[j][2]-1]; //k번째 숫자 입력
+            }
+            return answer;
+        }
+        // sort()를 실행하기 전의 추출된 array숫자들을 담을 배열 ans1을 생성해줬다.
+
+        // commands의 길이만큼 for문을 1차로 돌린 후, 2차로 commands속 각각의 묶음 속 1,2번째 숫자만큼 for문을 돌려줬다.
+        // 인덱스(cnt)를 for문이 돌때마다 1씩 늘려줘서 i번째(commands속 각각 묶음 속 2번째 수)까지 해당하는 array속 요소를 ans1배열에 넣어준다.
+        // ans1[cnt] = array[i]를 ans1.push(array[i])라고 작성해도 같은 의미일 것 같다.
+
+        // ans1배열을 sort()해준 뒤, k번째 숫자만 answer배열로 넣어준다.
+        // answer[j]=ans1[commands[j][2]-1]; 역시 answer.push(ans1[commands[j][2]-1])과 같을 듯.!
+
+    </script>
+    
+</body>
+</html>
