@@ -132,6 +132,53 @@
             return answer;
         }
 
+        // 시도 3) 성공.
+        // 인터넷 검색 참고해서 해결.
+        // 도난당한 사람 중 본인의 여분, 앞사람 여분, 뒷사람 여분이 있는 사람을 제외해서 결과적으로 체육복을 입을 수 있는 총 인원을 구할 것이다.
+        function solution(n, lost, reserve) {
+            var answer = [];
+            
+            // 도난당한 사람 중 여벌의 체육복이 있는 사람 제외.
+            for(let i = 0; i < lost.length; i++) {
+                let lostButReserve = reserve.indexOf(lost[i]);
+                if(lostButReserve !== -1) { // 잃어버렸지만 여분이 있으면,
+                    // 여분가진 인원에서 제외.
+                    delete reserve[lostButReserve];
+                    // 잃어버린 본인 인원에서 제외.
+                    delete lost[i];
+                }
+            }
+            
+            for(let i = 0; i < lost.length; i++) {
+                // 앞 사람이 여분 있을 때.(첫번째 사람 제외)
+                if(lost[i] !== 1 && reserve.indexOf(lost[i] - 1) !== -1) {
+                    // 잃어버린 앞 사람 reserve인원에서 제외.(빌려줬으니까)
+                    delete reserve[reserve.indexOf(lost[i] - 1)];
+                    // 잃어버린 본인도 인원에서 제외.
+                    delete lost[i];
+                }
+                // 뒷 사람이 여분 있을 때.
+                else if(reserve.indexOf(lost[i] + 1) !== -1) {
+                    // 잃어버린 뒷 사람 reserve인원에서 제외.
+                    delete reserve[reserve.indexOf(lost[i] + 1)];
+                    // 잃어버린 본인 인원에서 제외.
+                    delete lost[i];
+                }
+            }
+            
+            // 이 부분이 이해가 안간다. 
+            // lost의 요소 중 false가 아닌 애들로 새롭게 lost라는 배열을 구성한다는 건데..
+            // false값이 나오는 경우가 있나???
+            lost = lost.filter(function(element) {
+                return lost !== false;
+            })
+            
+            // 전체 인원수(n)에서 잃어버린 학생 수를 빼준다.
+            answer = n - lost.length;
+            
+            return answer;
+        }
+
     </script>
     
 </body>
