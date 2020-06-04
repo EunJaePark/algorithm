@@ -169,6 +169,7 @@
             // 이 부분이 이해가 안간다. 
             // lost의 요소 중 false가 아닌 애들로 새롭게 lost라는 배열을 구성한다는 건데..
             // false값이 나오는 경우가 있나???
+            // delete로 요소가 제거되면 true, 요소가 제거되지 않으면 false를 반환한다고 한다.
             lost = lost.filter(function(element) {
                 return lost !== false;
             })
@@ -178,6 +179,55 @@
             
             return answer;
         }
+
+
+
+
+
+
+        // 다른사람 풀이 1)
+        function solution(n, lost, reserve) {
+            let answer = 0;
+            
+            let s = [];
+            for(let i=0; i<n; i++) {
+                s.push(1);
+            }
+            
+            for(let i=0; i<reserve.length; i++) {
+                s[reserve[i]-1]++;
+            }
+            
+            for(let i=0; i<lost.length; i++) {
+                s[lost[i]-1]--;
+            }    
+            
+            for(let i=0; i<s.length; i++) {
+                if(s[i] == 0) {
+                    if(i>0 && s[i-1] > 1) {
+                        s[i-1] -= 1;
+                        s[i] = 1;
+                        answer++;
+                    } else if(i < s.length-1 && s[i+1] > 1) {
+                        s[i+1] -= 1;
+                        s[i] = 1;
+                        answer++;
+                    }            
+                } else {
+                    answer++;
+                } 
+            }
+                
+            return answer;
+        }
+        // 먼저 학생들의 수 만큼 학생들이 가진 옷의 갯수를 value로 하는 배열을 만들어주고, 옷의 갯수는 모두 가져왔으므로 1로 셋팅한다.
+        // 여벌 옷을 가져온 학생 reverse 배열을 순회하면서 옷의 갯수를 1 추가한다.
+        // 그리고 옷을 도둑맞은 학생들을 뜻하는 reverse 배열을 순회하면서 옷을 도둑맞은 학생들의 옷의 갯수를 1 감소시킨다.        
+
+        // 학생들이 현재 가진 옷의 갯수를 나타내는 배열 셋팅을 완료했다.
+        // 해당 배열을 순회하면서 
+        // 만약 옷이 없는 학생의 경우, 앞의 학생이 가진 옷의 갯수가 2개 이상이거나, 뒤의 학생이 가진 옷이 2개 이상이면
+        // 해당 학생의 값을 1 증가하고 앞 또는 뒤에 있는 학생의 옷의 갯수를 1 감소시킨다.
 
     </script>
     
