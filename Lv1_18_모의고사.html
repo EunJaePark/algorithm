@@ -50,6 +50,7 @@
             
             // 가장 높은 점수받은 사람 여러명일 경우 오름차순으로 정렬.
             var maxScore = Math.max.apply(null, score);
+
             for(var i = 0; i < score.length; i++) {
                 if(score[i] === maxScore) answer[i] = i+1;
             }
@@ -58,6 +59,31 @@
         }
 
         // 풀이 2)
+        // 수포자가 찍은 답과 정답을 비교하는 방식 - 인터넷 검색해서 참고했다.
+        function solution(answers) {
+            var answer = [];
+
+            // 수포자가 찍는 방식 배열 생성.
+            var student = [[1,2,3,4,5], [2,1,2,3,2,4,2,5], [3,3,1,1,2,2,4,4,5,5]];
+            // 점수 배열 생성.
+            var score = [0, 0, 0];
+            
+            // student 배열 속 3명 순서대로 분류한 뒤, 3명 각각의 찍은답안 개수만큼 나눈 나머지값 구함.
+            // 나눈 나머지값을 구하는게 이해가 안간다!!!
+            // 이해됐다!! answer수만큼 찍은 답을 돌아야 하는데, n번만큼 돌고 난 뒤의 나머지 답 개수만큼 더 비교해야 하니까 나머지를 구해준 것.!!
+            for(let i = 0; i < answers.length; i++) {
+                if(answers[i] === student[0][i % 5]) score[0]++;
+                if(answers[i] === student[1][i % 8]) score[1]++;
+                if(answers[i] === student[2][i % 10]) score[2]++;
+            }
+
+            var maxScore = Math.max.apply(null, score);
+
+            for(let i = 0; i < score.length; i++){
+                if(score[i] === maxScore) answer.push(i+1);
+            }
+            return answer;
+        }
 
     </script>
     
