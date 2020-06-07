@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm</title>
+</head>
+<body>
+
+    <h1>문제 설명</h1>
+    <p>
+        정수를 담고 있는 배열 arr의 평균값을 return하는 함수, solution을 완성해보세요.
+    </p>
+
+    
+    <h2>제한 조건</h2>
+    <ul>
+        <li>arr은 길이 1 이상, 100 이하인 배열입니다.</li>
+        <li>arr의 원소는 -10,000 이상 10,000 이하인 정수입니다.</li>
+    </ul>
+
+
+
+    <script>
+        // 풀이 1)
+        function solution(arr) {
+            var answer = 0;
+            
+            arr.forEach(element => { answer = answer + element })
+            
+            return answer / arr.length;
+        }
+        // arr의 요소를 answer에 전부 더해준 뒤, arr배열의 개수만큼 나눠줬다.
+        // 쉽게 풀었더니 점수도 쉽게 나왔다ㅎ...
+
+
+
+        // 다른사람 1)
+        function average(array){
+            return array.reduce((a, b) => a + b) / array.length;
+        }
+        // reduce() : 배열을 순회하며 인덱스 데이터를 줄여가며 어떠한 기능을 수행.
+        // reduce((누적값, 현재값, 인덱스, 요소) => {return 결과}, 초기값)
+
+        // reduce()의 에시. - fruit에 있는 과일별 개수 산출.
+        const fruit = ['apple', 'grape', 'banana', 'apple', 'orange', 'grape', 'apple', 'orange'];
+ 
+        const result = fruit.reduce((object, currentValue) => {
+            if (!object[currentValue]) {
+                object[currentValue] = 0;
+            }
+            object[currentValue]++;
+        
+            return object;
+        }, {});
+        // 결과
+        // { apple:3, banana:1, grape:2, ornage:2 }
+
+
+    </script>
+    
+</body>
+</html>
