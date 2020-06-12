@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm</title>
+</head>
+<body>
+
+    <h1>문제 설명</h1>
+    <p>
+        정수 num이 짝수일 경우 Even을 반환하고 홀수인 경우 Odd를 반환하는 함수, solution을 완성해주세요.
+    </p>
+
+    
+    <h2>제한 조건</h2>
+    <ul>
+        <li>num은 int 범위의 정수입니다.</li>
+        <li>0은 짝수입니다.</li>
+    </ul>
+
+
+
+    <script>
+        // 풀이 1)
+        function solution(num) {
+            return (num % 2) === 0 ? 'Even' : 'Odd';
+        }
+
+
+
+        // 다른사람 풀이 1)
+        function evenOrOdd(num) {
+            return num % 2 ? "Odd" : "Even";
+        }
+        // 0이 false라는 것을 이용.
+
+    </script>
+    
+</body>
+</html>
