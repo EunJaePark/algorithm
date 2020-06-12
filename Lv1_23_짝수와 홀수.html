@@ -34,6 +34,17 @@
             return num % 2 ? "Odd" : "Even";
         }
         // 0이 false라는 것을 이용.
+        
+        // < js에서 false로 판명되는 것들 >
+        // - undefined, null
+        // - NaN
+        // - 0(숫자 리터럴), -0
+        // - ""(빈 문자열)
+        // - false
+
+        // **주의할 점**
+        // - 빈 문자열은 false이지만, 빈 배열과 빈 객체는 true이다!!
+        // - NaN은 그 자신과 같지 않은 유일한 자료형.
 
     </script>
     
