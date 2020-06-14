@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm</title>
+</head>
+<body>
+
+    <h1>문제 설명</h1>
+    <p>
+        두 수를 입력받아 두 수의 최대공약수와 최소공배수를 반환하는 함수, solution을 완성해 보세요. 
+        배열의 맨 앞에 최대공약수, 그다음 최소공배수를 넣어 반환하면 됩니다. 
+        예를 들어 두 수 3, 12의 최대공약수는 3, 최소공배수는 12이므로 solution(3, 12)는 [3, 12]를 반환해야 합니다.
+    </p>
+
+    
+    <h2>제한 조건</h2>
+    <ul>
+        <li>두 수는 1이상 1000000이하의 자연수입니다.</li>
+    </ul>
+
+
+
+    <script>
+        // 풀이 1)
+        function solution(n, m) {
+            var answer = [];
+            
+            // var max = '';
+            //최대공약수
+            for(let i = n; i > 0; i--) {
+                if(n % i === 0  &&  m % i === 0) {
+                    var max = i;
+                    break; //값이 나오면 break로 더이상 for문 돌지 않도록 해줌!
+                }
+            }
+            
+            // 최소공배수
+            var min = (n*m) / max
+            
+            answer = [max, min];
+            
+            return answer;
+        }
+        // for문의 i 범위를 정하는데 조금 헤맴. '='를 제일 처음에 써야한다.
+        // 이전 스터디때 알게 된 break를 활용했다.
+
+
+
+
+
+        // 다른사람 풀이 1)
+        function solution(n, m) {
+            var answer = [];
+            const max = Math.max(n, m);
+            const min = Math.min(n, m);
+
+            answer[0] = gcd(min, max);
+            answer[1] = lcm(min, max);
+
+            return answer;
+        }
+
+        //최대공약수
+        function gcd(min, max) {
+            return (min%max) === 0 ? max : gcd(max, min%max);
+            // min%max의 나머지가 0이 아닐 경우, 나머지 max값을 나머지 값으로 나눠줬다.
+
+            // 숫자를 대입해서 생각해보자.
+            // 1. gcd(20, 40) => 나머지 20
+            //    gcd(40, 20) => 나머지 0
+            //    ===> 최대공약수 20
+
+            // 2. gcd(12, 20) => 나머지 12
+            //    gcd(20, 12) => 나머지 8
+            //    gcd(12, 8) => 나머지 4
+            //    gcd(8, 4) => 나머지 0
+            //    ===> 최대공약수 4
+        }
+        //최소공배수
+        function lcm(min, max) {
+            return min * max / gcd(min, max);
+        }
+
+
+
+        // ***** 유클리드 호제법(두 수의 최대공약수를 구하는 알고리즘) *****
+        // 유클리드 호제법을 이해하려면 MOD연산에 대해 알고 있어야 한다.
+        // MOD연산 : 두 값을 나눈 나머지를 구하는 연산.
+
+        // 먼저, 큰 수를 작은 수로 나눈 나머지를 구한다.(MOD연산)
+        // 그 다음, 나눴던 수(앞계산에서 작은수)와 나머지로 또다시 MOD연산을 한다.
+        // 이 과정을 계속 반복해서 나머지가 0이 되었을 때 나누는 수로 사용된 수가 최대공약수가 된다.
+
+
+
+
+
+        // 다른사람 풀이 2)
+        function greatestCommonDivisor(n, m) {return m ? greatestCommonDivisor(m, n % m) : Math.abs(n);}
+        function leastCommonMultipleOfTwo(n, m) {return (n * m) / greatestCommonDivisor(n, m);}
+        function solution(n, m) {
+            return [greatestCommonDivisor(n, m),leastCommonMultipleOfTwo(n, m)];
+        }
+
+
+ 
+    </script>
+    
+</body>
+</html>
