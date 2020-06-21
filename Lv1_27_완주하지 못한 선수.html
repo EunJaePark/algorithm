@@ -27,8 +27,47 @@
 
     <script>
         // 풀이 1)
+        function solution(participant, completion) {
+            var answer = '';
+    
+            participant = participant.sort();
+            completion = completion.sort();
+            
+            for(let i = 0; i < participant.length; i++) {      
+                if(completion[i] !== participant[i]) {
+                    answer = participant[i];
+                    break;
+                }
+            }
+            
+            return answer;
+        }
+        // 전체 참여 인원이 적힌 participant의 length로 순서를 줘서 비교.
 
-        // 풀이 2)
+
+
+        // 시도 1)
+        function solution(participant, completion) {
+            var answer = '';
+    
+            participant = participant.sort();
+            completion = completion.sort();
+            
+            for(let i = 0; i < completion.length; i++) {        
+                for(let j = 0; j < participant.length; j++) {
+                    if(completion[i] !== participant[j]) {
+                        answer = participant[i];
+                        break;
+                    }
+                }
+            }
+            
+            return answer;
+        }
+        // participant와 completion의 길이를 다르게 해서 비교해서 실패.
+        // 둘 다 sort()로 순서대로 정렬해줬는데, participant에 이름이 더 많으니 당연히 순서가 달라 오답이 나오지!!
+        // ===> 그런데 다시보니 왜 오답인지 헷갈린다. participant의 길이에 맞춰 순서대로 비교하는 것과, 각자의 길이 순서로 비교하는 것과 다를게 뭐지?
+
 
     </script>
     
