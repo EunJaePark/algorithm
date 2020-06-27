@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm</title>
+</head>
+<body>
+
+    <h1>문제 설명</h1>
+    <p>
+        이 문제에는 표준 입력으로 두 개의 정수 n과 m이 주어집니다.
+        별(*) 문자를 이용해 가로의 길이가 n, 세로의 길이가 m인 직사각형 형태를 출력해보세요.
+    </p>
+
+    
+    <h2>제한 조건</h2>
+    <ul>
+        <li>n과 m은 각각 1000 이하인 자연수입니다.</li>
+    </ul>
+    
+
+    <h2>예시</h2>
+    <ul>
+        <li>입력 : 5  3</li>
+        <li>
+            출력 : *****
+                  *****
+                  *****
+        </li>
+    </ul>
+
+
+
+    <script>
+        // 풀이 1) 
+        process.stdin.setEncoding('utf8');
+        process.stdin.on('data', data => {
+            const n = data.split(" ");
+            const a = Number(n[0]), b = Number(n[1]);
+            
+            for(let i = 0; i < b; i++) {
+                let stars = '';
+                for(let j = 0; j < a; j++) {
+                    stars = stars + '*'
+                }
+                console.log(stars)
+            }          
+        });
+        // a로 만든 for문을 돌며 stars에 한 줄에 a개수만큼 *를 입력.
+        // b로 만든 for문을 돌며 a개수만큼 *가 입력된 stars를 반복해서 console.log로 찍어내줌.
+
+
+
+        // 풀이 2)
+        // repeat() 이용.
+        process.stdin.setEncoding('utf8');
+        process.stdin.on('data', data => {
+            const n = data.split(" ");
+            const a = Number(n[0]), b = Number(n[1]);
+
+            for(let i = 0; i < b; i++) {
+                console.log('*'.repeat(a));    
+            }
+        });
+
+
+
+
+
+        // 다른사람 풀이 1)
+        process.stdin.setEncoding('utf8');
+        process.stdin.on('data', data => {
+            const n = data.split(" ");
+            const a = Number(n[0]), b = Number(n[1]);
+
+            const star = `${'*'.repeat(a)}\n`;
+            console.log(star.repeat(b));
+        });
+        // ${'*'.repeat(a)}\n에서 \n이 무슨 역할인지 모르겠다.
+
+
+
+
+
+
+        // ***** node에서 stdin/stdout 표준 입출력을 처리하기 *****
+
+        // stdin을 실행하기 (stdin = standard input)
+        process.stdin.resume();  // process.stdin이라는 함수를 사용하기 위해 맨 처음 먼저 제시해 준 것.
+        process.stdin.setEncoding('utf8');
+
+        // event 등록하기
+        process.stdin.on('data', function(chunk) {
+            // 출력하기
+            process.stdout.write('data'+chunk);
+        })
+
+        // 종료하기 (stdout = standard output)
+        process.stdin.on('end', function() {
+            process.stdout.write('end');
+        })
+        // (https://m.blog.naver.com/PostView.nhn?blogId=zerosum99&logNo=120208002778&proxyReferer=https:%2F%2Fwww.google.com%2F) 참고함.
+
+        // **************************************************
+
+    </script>
+    
+</body>
+</html>
