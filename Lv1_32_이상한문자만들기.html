@@ -52,12 +52,12 @@
                 for(let j = 0; j < splitS[i].length; j++) {
                     a.push(j % 2 === 0 ? splitS[i][j].toUpperCase() : splitS[i][j].toLowerCase());
                 }
-                answer.push(a.join(''));
                 // answer.push(a.join().replace(/\,/g, ''));
+                answer.push(a.join(''));
             }
             
+            // return answer.join().replace(/\,/g, ' ');           
             return answer.join(' ');
-            // return answer.join().replace(/\,/g, ' ');
         }
         // split()을 이용해 s를 단어별로 분해해줬다. 
         // 분해한 단어의 개수만큼 for문을 돌리고, 그 속에서 해당 단어의 철자들의 개수만큼 다시 for문을 돌려 짝/홀수에 따라 대/소문자로 변경해준 뒤, 해당 단어를 a라는 배열에 넣어줬다.
