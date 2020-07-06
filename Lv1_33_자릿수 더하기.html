@@ -23,8 +23,27 @@
 
     <script>
         // 풀이 1)
+        function solution(n)
+        {
+            var answer = 0;
+
+            String(n).split('').forEach(ele => {
+                answer += parseInt(ele);
+            })
+
+            return answer;
+        }
+        // 숫자 n을 string로 변경 후 분리해 각각을 다시 숫자로 변환 후 더해줬다.
+        // 점수 낮게 나옴...ㅠ...
+
+
+
 
         // 풀이 2)
+        function solution(n){
+            return (n+"").split("").reduce((acc, curr) => acc + parseInt(curr), 0);
+        }
+        // 배열.reduce((누적값, 현재값, 인덱스, 요소) => {return 결과}, 초깃값)
 
     </script>
     
