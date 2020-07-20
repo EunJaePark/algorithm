@@ -84,6 +84,38 @@
             }
             return answer;
         }
+        
+        
+        /* ------------------------- 복습 ---------------------------- */
+        // 7/20(월)
+        // 풀이 1)
+        function solution(answers) {
+            var answer = [];
+
+            let student = [[1, 2, 3, 4, 5], [2, 1, 2, 3, 2, 4, 2, 5], [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]];
+
+            let score = [0, 0, 0];
+
+            for(let i = 0; i < answers.length; i++) {
+                for(let j = 0; j < student.length; j++) {
+                    if(answers[i] === student[j][i % student[j].length]) score[j]++;
+                }
+            }
+
+            let maxScore = Math.max(...score);
+
+            score.forEach((ele, index) => {
+                if(ele === maxScore) answer.push(index+1);
+            })
+
+            return answer;
+        }
+        // 다시 풀어보니 이전에 풀었던 풀이가 조금씩 생각나더라.
+        
+        // 이전 풀이때는 만약 학생표본이 늘어나거나 바뀌면 각 학생의 답안비교를 새로 작성해야 하지만,
+        // 오늘 풀이는 학생 표본이 어떻게 바뀌어도 풀이를 바꿀 필요가 없도록 풀음. 더 나아진듯!!
+        
+        // 변수명이 똑같.. 언제나 직관적인 작명...ㅋㅋㅋㅋ
 
     </script>
     
