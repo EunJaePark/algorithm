@@ -99,6 +99,30 @@
         /* ------------------------- 복습 ---------------------------- */
         // 7/21(화)
         // 풀이 1)
+        function solution(array, commands) {
+            let answer = [];
+
+            let i = [];
+            let j = [];
+            let k = [];
+            commands.forEach(ele => {
+                // 앞에서 부터 넣어주니까 없어지면서 순서가 안맞아서 뒤에 있는 k부터 넣어줌.)
+                k.push(parseInt(ele.splice(2, 1).join()));
+                j.push(parseInt(ele.splice(1, 1).join()));
+                i.push(parseInt(ele.splice(0, 1).join()));       
+            });
+
+            for(let p = 0; p < i.length; p++) {
+                answer.push(array.slice(i[p] - 1, j[p]).sort((a, b) => a-b).splice(k[p] - 1, 1) * 1);
+                // answer = array.slice(1, 5).sort((a, b) => a-b);
+            }
+
+            return answer;
+        }
+        // 지난 번에 풀었던 방식 생각 안남.
+        // 지난 번 풀이에 비해 노가다 방식으로 풀었네...
+        
+        // 쉽게 풀었지만 아직 내가 생각해 낼 수 있는 풀이는 너무너무너무나 초보적이다. 흑.
 
     </script>
     
