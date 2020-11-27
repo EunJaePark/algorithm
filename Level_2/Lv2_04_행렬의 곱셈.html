@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm</title>
+</head>
+<body>
+
+    <h1>문제 설명</h1>
+    <p>
+        2차원 행렬 arr1과 arr2를 입력받아, arr1에 arr2를 곱한 결과를 반환하는 함수, solution을 완성해주세요.
+    </p>
+
+    
+    <h2>제한 조건</h2>
+    <ul>
+        <li>행렬 arr1, arr2의 행과 열의 길이는 2 이상 100 이하입니다.</li>
+        <li>행렬 arr1, arr2의 원소는 -10 이상 20 이하인 자연수입니다.</li>
+        <li>곱할 수 있는 배열만 주어집니다.</li>
+    </ul>
+
+
+
+    <script>
+        // 풀이 1) 
+        function solution(arr1, arr2) {
+            var answer = [];
+            // arr1과 arr2 배열의 길이가 다를 경우를 생각해줘야 한다.
+            // 따라서 arr2의 length를 for문의 조건으로 줄 때, arr2의 속성하나를 선택해줘야 arr1의 길이가 더 길 경우 에러 안난다.
+            // 난 처음에 arr2.length로 조건을 줬었다. 이렇게 하니까 arr1배열의 속성이 3개고 이 속성의 객체가 3개이면서, arr2의 속성이 3개고 이 속성의 개체가 2개일 경우 숫자가 맞지 않아 에러가 났었다. 
+            // 테스트3번을 돌린 결과 arr2[k][j]를 계산할 때 j의 값이 2가 나와야하는데 3이 나왔으니 에러날수밖에!!
+            for(let i = 0; i < arr1.length; i++) {
+                let multiArr = [];
+                for(let j = 0; j < arr2[0].length; j++) { 
+                    let multiply = 0;
+                    // for(let k = 0; k < arr1[i].length; k++) {
+                    let count = 0;
+                    arr1[i].forEach(arr11 => {
+                        multiply += arr11 * arr2[count][j]
+                        count++;
+                    })
+                    //     multiply += arr1[i][k] * arr2[k][j];
+                    // }
+                    multiArr.push(multiply);
+                }
+                answer.push(multiArr);
+            }
+            
+            // arr1.forEach(arr11 => {
+            //     let count = 0;
+            //     let multiArr = [];
+            //     while(count < arr11.length) {
+            //         let multiply = 0;
+            //         for(let j = 0; j < arr2.length; j++) {
+            //             multiply += (arr11[count] * arr2[count][j]);       
+            //         }
+            //         count++;
+            //         multiArr.push(multiply);
+            //     }
+            //     answer.push(multiArr);
+            // });
+            
+            return answer;
+        }
+
+        // 사실 처음 행렬의 곱셈 문제 자체를 이해하는데 좀 시간 걸렸다...ㅎㅎ....핳하핳.....
+
+
+
+        // 풀이 2)
+        function solution(arr1, arr2) {
+            return Array(arr1.length).fill().map((r, i) => Array(arr2[0].length).fill().map((v, j) => arr1[i].reduce((a, c, k) => a + c * arr2[k][j], 0)))
+        }
+        // 어떻게...이렇게....
+        // reduce()
+
+    </script>
+    
+</body>
+</html>
