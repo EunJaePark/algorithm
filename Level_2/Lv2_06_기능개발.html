@@ -62,7 +62,26 @@
         // for문을 두겹으로 하나는 비교 기준 남은작업기간 구하고, 하나는 나머지 남은작업기간들 돌려서 비교하자. -> 복잡해지고 실패!!
         // for문은 하나하나 비교하기 위해 하나만 사용하고, 비교기준으로 사용할 남은작업기간은 for문 바깥에서 선언해주자. -> 성공!
 
-        // 풀이 2)
+
+
+
+        // 다른사람 풀이 
+        function solution(progresses, speeds) {
+            let answer = [0];
+            let days = progresses.map((progress, index) => Math.ceil((100 - progress) / speeds[index]));
+            let maxDay = days[0];
+
+            for(let i = 0, j = 0; i< days.length; i++){
+                if(days[i] <= maxDay) {
+                    answer[j] += 1;
+                } else {
+                    maxDay = days[i];
+                    answer[++j] = 1;
+                }
+            }
+
+            return answer;
+        } 
 
     </script>
     
