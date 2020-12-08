@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm</title>
+</head>
+<body>
+
+    <h1>문제 설명</h1>
+    <p>
+        0 또는 양의 정수가 주어졌을 때, 정수를 이어 붙여 만들 수 있는 가장 큰 수를 알아내 주세요.
+
+        예를 들어, 주어진 정수가 [6, 10, 2]라면 [6102, 6210, 1062, 1026, 2610, 2106]를 만들 수 있고, 이중 가장 큰 수는 6210입니다.
+
+        0 또는 양의 정수가 담긴 배열 numbers가 매개변수로 주어질 때, 순서를 재배치하여 만들 수 있는 가장 큰 수를 문자열로 바꾸어 return 하도록 solution 함수를 작성해주세요.
+    </p>
+
+    
+    <h2>제한 조건</h2>
+    <ul>
+        <li>numbers의 길이는 1 이상 100,000 이하입니다.</li>
+        <li>numbers의 원소는 0 이상 1,000 이하입니다.</li>
+        <li>정답이 너무 클 수 있으니 문자열로 바꾸어 return 합니다.</li>
+    </ul>
+
+
+
+    <script>
+        // 풀이 1)
+        function solution(numbers) {
+            var answer = '';    
+            
+            let changeString = numbers.map(num => {
+                return String(num);
+            })
+            
+            let sortDown = changeString.sort((a, b) => {
+                return (b + a) - (a + b);
+            });
+
+            let joinArr = sortDown.join('');
+            
+            answer = joinArr.replace(/^0+/, '0');
+
+            return answer;
+        }
+
+        // 케이스11 : {0, 0, 0, 0, }
+        // 결과가 '0'이 나와야 함.
+
+        // 9점.
+
+
+        // (b + a) - (a + b)
+        //  숫자가 아닌 string을 더해서 비교해줬다.
+        //  string이더라도 빼주면 결과값이 숫자로 나온다.
+        //  ex) '30' - '20' // 10
+        //  따라서, 두 문자열을 비교해 큰것이 앞으로 오도록 해준 것.
+
+
+        // /^0+/
+        // 정규식 이용
+        // ^ : 입력 시작 부분에 대응된다. 
+        //      ex) /^A/는 'anA'의 A와는 대응되지 않는다.
+        //          하지만, 'AnE'의 A와는 대응된다.
+        // + : 앞의 표현식이 1회 이상 연속으로 반복되는 부분과 대응된다.
+        //      ex) /a+/는 'candy'의 'a'에 대응되고, 'caaaaandy'의 모든 'a'들에 대응되지만, 'cndy'내의 어느부분과도 대응되지 않는다.
+
+
+
+
+
+
+        // 다른사람 풀이
+        function solution(numbers) {
+    
+            var answer = numbers.map(c=> c + '').
+                            sort((a,b) => (b+a) - (a+b)).join('');
+            
+            return answer[0]==='0'? '0' : answer;
+        }
+
+        // answer[0]==='0'? '0' 
+        // 제일 앞의 수가 0이면 그 뒤에 더 큰 수가 올 수 없다. 이 문제의 조건으로는.
+        // 따라서, [0]번째 요소가 '0'이면 그 뒤도 '0'이라는 이야기이기 때문에, 정답으로 '0'을 준 것이다.
+
+    </script>
+    
+</body>
+</html>
